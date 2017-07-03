@@ -8,22 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		D308749C1F0AD95D00341ECB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D308749B1F0AD95D00341ECB /* AppDelegate.swift */; };
-		D308749E1F0AD95D00341ECB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D308749D1F0AD95D00341ECB /* ViewController.swift */; };
-		D30874A11F0AD95D00341ECB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D308749F1F0AD95D00341ECB /* Main.storyboard */; };
-		D30874A41F0AD95D00341ECB /* MyGestureRecognizer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D30874A21F0AD95D00341ECB /* MyGestureRecognizer.xcdatamodeld */; };
 		D30874A61F0AD95D00341ECB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D30874A51F0AD95D00341ECB /* Assets.xcassets */; };
-		D30874A91F0AD95D00341ECB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D30874A71F0AD95D00341ECB /* LaunchScreen.storyboard */; };
+		D30874B91F0ADC2100341ECB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30874B81F0ADC2100341ECB /* ViewController.swift */; };
+		D30874BC1F0ADC6200341ECB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D30874BA1F0ADC6200341ECB /* LaunchScreen.storyboard */; };
+		D30874BD1F0ADC6200341ECB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D30874BB1F0ADC6200341ECB /* Main.storyboard */; };
+		D30874C01F0ADD6600341ECB /* MyGestureRecognizer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D30874BE1F0ADD6600341ECB /* MyGestureRecognizer.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D30874981F0AD95D00341ECB /* MyGestureRecognizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyGestureRecognizer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D308749B1F0AD95D00341ECB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D308749D1F0AD95D00341ECB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D30874A01F0AD95D00341ECB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D30874A31F0AD95D00341ECB /* MyGestureRecognizer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyGestureRecognizer.xcdatamodel; sourceTree = "<group>"; };
 		D30874A51F0AD95D00341ECB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D30874A81F0AD95D00341ECB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D30874AA1F0AD95D00341ECB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D30874B81F0ADC2100341ECB /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ViewControllers/ViewController.swift; sourceTree = "<group>"; };
+		D30874BA1F0ADC6200341ECB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D30874BB1F0ADC6200341ECB /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		D30874BF1F0ADD6600341ECB /* MyGestureRecognizer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyGestureRecognizer.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +56,81 @@
 		D308749A1F0AD95D00341ECB /* MyGestureRecognizer */ = {
 			isa = PBXGroup;
 			children = (
-				D308749B1F0AD95D00341ECB /* AppDelegate.swift */,
-				D308749D1F0AD95D00341ECB /* ViewController.swift */,
-				D308749F1F0AD95D00341ECB /* Main.storyboard */,
-				D30874A51F0AD95D00341ECB /* Assets.xcassets */,
-				D30874A71F0AD95D00341ECB /* LaunchScreen.storyboard */,
-				D30874AA1F0AD95D00341ECB /* Info.plist */,
-				D30874A21F0AD95D00341ECB /* MyGestureRecognizer.xcdatamodeld */,
+				D30874B71F0ADBC300341ECB /* Model */,
+				D30874B61F0ADBA800341ECB /* ViewControllers */,
+				D30874B51F0ADB9C00341ECB /* View */,
+				D30874B41F0ADB8E00341ECB /* Supporting files */,
+				D30874B31F0ADB8000341ECB /* Utilities */,
+				D30874B21F0ADB6E00341ECB /* Extension */,
+				D30874B11F0ADB5700341ECB /* Storyboards */,
+				D30874B01F0ADB2F00341ECB /* Resources */,
 			);
 			path = MyGestureRecognizer;
+			sourceTree = "<group>";
+		};
+		D30874B01F0ADB2F00341ECB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D30874BE1F0ADD6600341ECB /* MyGestureRecognizer.xcdatamodeld */,
+				D30874A51F0AD95D00341ECB /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D30874B11F0ADB5700341ECB /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				D30874BA1F0ADC6200341ECB /* LaunchScreen.storyboard */,
+				D30874BB1F0ADC6200341ECB /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		D30874B21F0ADB6E00341ECB /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Extension;
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D30874B31F0ADB8000341ECB /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		D30874B41F0ADB8E00341ECB /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				D308749B1F0AD95D00341ECB /* AppDelegate.swift */,
+				D30874AA1F0AD95D00341ECB /* Info.plist */,
+			);
+			name = "Supporting files";
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D30874B51F0ADB9C00341ECB /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D30874B61F0ADBA800341ECB /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D30874B81F0ADC2100341ECB /* ViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		D30874B71F0ADBC300341ECB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,9 +193,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D30874A91F0AD95D00341ECB /* LaunchScreen.storyboard in Resources */,
+				D30874BD1F0ADC6200341ECB /* Main.storyboard in Resources */,
+				D30874BC1F0ADC6200341ECB /* LaunchScreen.storyboard in Resources */,
 				D30874A61F0AD95D00341ECB /* Assets.xcassets in Resources */,
-				D30874A11F0AD95D00341ECB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,32 +206,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D30874A41F0AD95D00341ECB /* MyGestureRecognizer.xcdatamodeld in Sources */,
-				D308749E1F0AD95D00341ECB /* ViewController.swift in Sources */,
+				D30874B91F0ADC2100341ECB /* ViewController.swift in Sources */,
+				D30874C01F0ADD6600341ECB /* MyGestureRecognizer.xcdatamodeld in Sources */,
 				D308749C1F0AD95D00341ECB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		D308749F1F0AD95D00341ECB /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D30874A01F0AD95D00341ECB /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		D30874A71F0AD95D00341ECB /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D30874A81F0AD95D00341ECB /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		D30874AB1F0AD95D00341ECB /* Debug */ = {
@@ -268,7 +315,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = YY346RZE89;
-				INFOPLIST_FILE = MyGestureRecognizer/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/MyGestureRecognizer/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mwloczko.MyGestureRecognizer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -281,7 +328,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = YY346RZE89;
-				INFOPLIST_FILE = MyGestureRecognizer/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/MyGestureRecognizer/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mwloczko.MyGestureRecognizer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -308,16 +355,17 @@
 				D30874AF1F0AD95D00341ECB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		D30874A21F0AD95D00341ECB /* MyGestureRecognizer.xcdatamodeld */ = {
+		D30874BE1F0ADD6600341ECB /* MyGestureRecognizer.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				D30874A31F0AD95D00341ECB /* MyGestureRecognizer.xcdatamodel */,
+				D30874BF1F0ADD6600341ECB /* MyGestureRecognizer.xcdatamodel */,
 			);
-			currentVersion = D30874A31F0AD95D00341ECB /* MyGestureRecognizer.xcdatamodel */;
+			currentVersion = D30874BF1F0ADD6600341ECB /* MyGestureRecognizer.xcdatamodel */;
 			path = MyGestureRecognizer.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
