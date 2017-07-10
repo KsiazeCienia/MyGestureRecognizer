@@ -13,6 +13,12 @@
 		D30874BC1F0ADC6200341ECB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D30874BA1F0ADC6200341ECB /* LaunchScreen.storyboard */; };
 		D30874BD1F0ADC6200341ECB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D30874BB1F0ADC6200341ECB /* Main.storyboard */; };
 		D30874C01F0ADD6600341ECB /* MyGestureRecognizer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D30874BE1F0ADD6600341ECB /* MyGestureRecognizer.xcdatamodeld */; };
+		D30874C41F11600700341ECB /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30874C31F11600700341ECB /* CGPoint.swift */; };
+		D30874C61F1161DF00341ECB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30874C51F1161DF00341ECB /* Constants.swift */; };
+		D30874C81F11638800341ECB /* Stroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30874C71F11638800341ECB /* Stroke.swift */; };
+		D30874CA1F116BE200341ECB /* Unistroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30874C91F116BE200341ECB /* Unistroke.swift */; };
+		D30874CC1F13CECC00341ECB /* PowerOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30874CB1F13CECC00341ECB /* PowerOf.swift */; };
+		D30874CE1F13F04000341ECB /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30874CD1F13F04000341ECB /* CGFloat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +30,12 @@
 		D30874BA1F0ADC6200341ECB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D30874BB1F0ADC6200341ECB /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D30874BF1F0ADD6600341ECB /* MyGestureRecognizer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyGestureRecognizer.xcdatamodel; sourceTree = "<group>"; };
+		D30874C31F11600700341ECB /* CGPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
+		D30874C51F1161DF00341ECB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D30874C71F11638800341ECB /* Stroke.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stroke.swift; sourceTree = "<group>"; };
+		D30874C91F116BE200341ECB /* Unistroke.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unistroke.swift; sourceTree = "<group>"; };
+		D30874CB1F13CECC00341ECB /* PowerOf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PowerOf.swift; sourceTree = "<group>"; };
+		D30874CD1F13F04000341ECB /* CGFloat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +101,9 @@
 		D30874B21F0ADB6E00341ECB /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				D30874C31F11600700341ECB /* CGPoint.swift */,
+				D30874CB1F13CECC00341ECB /* PowerOf.swift */,
+				D30874CD1F13F04000341ECB /* CGFloat.swift */,
 			);
 			name = Extension;
 			path = Extensions;
@@ -106,6 +121,7 @@
 			children = (
 				D308749B1F0AD95D00341ECB /* AppDelegate.swift */,
 				D30874AA1F0AD95D00341ECB /* Info.plist */,
+				D30874C51F1161DF00341ECB /* Constants.swift */,
 			);
 			name = "Supporting files";
 			path = "Supporting Files";
@@ -129,6 +145,8 @@
 		D30874B71F0ADBC300341ECB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D30874C71F11638800341ECB /* Stroke.swift */,
+				D30874C91F116BE200341ECB /* Unistroke.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -208,7 +226,13 @@
 			files = (
 				D30874B91F0ADC2100341ECB /* ViewController.swift in Sources */,
 				D30874C01F0ADD6600341ECB /* MyGestureRecognizer.xcdatamodeld in Sources */,
+				D30874CC1F13CECC00341ECB /* PowerOf.swift in Sources */,
+				D30874CA1F116BE200341ECB /* Unistroke.swift in Sources */,
+				D30874C41F11600700341ECB /* CGPoint.swift in Sources */,
 				D308749C1F0AD95D00341ECB /* AppDelegate.swift in Sources */,
+				D30874C61F1161DF00341ECB /* Constants.swift in Sources */,
+				D30874CE1F13F04000341ECB /* CGFloat.swift in Sources */,
+				D30874C81F11638800341ECB /* Stroke.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
