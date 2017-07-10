@@ -31,7 +31,7 @@
         <!--Item 1-->
         <scene sceneID="Geu-Dj-vvU">
             <objects>
-                <viewController id="qF6-6P-e9r" sceneMemberID="viewController">
+                <viewController id="qF6-6P-e9r" customClass="DrawingViewController" customModule="MyGestureRecognizer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GRd-Rt-e95"/>
                         <viewControllerLayoutGuide type="bottom" id="wXS-zu-Bor"/>
@@ -39,9 +39,23 @@
                     <view key="view" contentMode="scaleToFill" id="Ue1-hk-bs6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L2M-0n-JWA">
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wXS-zu-Bor" firstAttribute="top" secondItem="L2M-0n-JWA" secondAttribute="bottom" id="PlE-Sy-Tr2"/>
+                            <constraint firstAttribute="trailing" secondItem="L2M-0n-JWA" secondAttribute="trailing" id="bVF-Ea-7xM"/>
+                            <constraint firstItem="L2M-0n-JWA" firstAttribute="top" secondItem="GRd-Rt-e95" secondAttribute="bottom" id="mNK-LH-5r5"/>
+                            <constraint firstItem="L2M-0n-JWA" firstAttribute="leading" secondItem="Ue1-hk-bs6" secondAttribute="leading" id="nMj-bu-lM3"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="LxG-iS-6FK"/>
+                    <connections>
+                        <outlet property="drawSpace" destination="L2M-0n-JWA" id="lLy-NN-2C4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3IO-nw-Uea" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
