@@ -10,9 +10,11 @@ import UIKit
 
 public class Stroke {
     
-    let size = CGFloat(250)
-    let alpha = 30
-    let n = 96
+    static let size = CGFloat(250)
+    static let alpha = 30
+    static let n = 96
+    static let i = 12
+    static let phi = CGFloat((0.5)*(-1 + sqrt(5)))
     
     var points: [CGPoint]
     
@@ -24,12 +26,16 @@ public class Stroke {
         points.append(point)
     }
     
-    func scaleDimTo(points: [CGPoint]) {
-        
+    static func calculateStartUnitVector(points: [CGPoint]) -> CGPoint {
+        let x = points[i].x - points[0].x
+        let y = points[i].y - points[0].y
+        let vx = x / sqrt(x * x + y * y)
+        let vy = y / sqrt(x * x + y * y)
+        return CGPoint(x: vx, y: vy)
     }
     
     //MARK:- TODO pamiętać o radianach
-    func rotateBy(points: [CGPoint], radians: CGFloat) -> [CGPoint] {
+    static func rotateBy(points: [CGPoint], radians: CGFloat) -> [CGPoint] {
         let center = centroid(points: points)
         var newPoints = [CGPoint]()
         for point in points {
@@ -40,12 +46,51 @@ public class Stroke {
         return newPoints
     }
     
-    func indicativeAngle(points: [CGPoint]) -> CGFloat {
+    static func distanceAtBestAngle(points: [CGPoint], templatePoints: [CGPoint], fromAngle: CGFloat, toAngle: CGFloat, delta: CGFloat) -> CGFloat {
+        var x1 = Stroke.phi*fromAngle + (1 - Stroke.phi)*toAngle
+        var f1 = Stroke.distanceAtAngle(points: points, templatePoints: templatePoints, angle: x1)
+        var x2 = (1 - Stroke.phi)*fromAngle + Stroke.phi*toAngle
+        var f2 = Stroke.distanceAtAngle(points: points, templatePoints: templatePoints, angle: x2)
+        var newToAngle = toAngle
+        var newFromAngle = fromAngle
+        while (abs(newToAngle - newFromAngle) > delta) {
+            if f1 < f2 {
+                newToAngle = x2
+                x2 = x1
+                f2 = f1
+                x1 = Stroke.phi*fromAngle + (1 - Stroke.phi)*toAngle
+                f1 = Stroke.distanceAtAngle(points: points, templatePoints: templatePoints, angle: x1)
+            } else {
+                newFromAngle = x1
+                x1 = x2
+                f1 = f2
+                x2 = (1 - Stroke.phi)*fromAngle + Stroke.phi*toAngle
+                f2 = Stroke.distanceAtAngle(points: points, templatePoints: templatePoints, angle: x2)
+            }
+        }
+        return min(f1, f2)
+    }
+    
+    static func distanceAtAngle(points: [CGPoint], templatePoints: [CGPoint], angle: CGFloat) -> CGFloat {
+        let newPoints = Stroke.rotateBy(points: points, radians: angle)
+        return Stroke.pathDistance(points: newPoints, templatePoints: templatePoints)
+        
+    }
+    
+    static func pathDistance(points: [CGPoint], templatePoints: [CGPoint]) -> CGFloat {
+        var length = CGFloat(0)
+        for i in 0 ..< points.count {
+            length += points[i].distanceTo(point: templatePoints[i])
+        }
+        return length / CGFloat(points.count)
+    }
+    
+    static func indicativeAngle(points: [CGPoint]) -> CGFloat {
         let center = centroid(points: points)
         return atan2(center.y - points[0].y, center.x - points[0].x)
     }
     
-    func resample(points: [CGPoint], totalPoints: Int) -> [CGPoint] {
+    static func resample(points: [CGPoint], totalPoints: Int) -> [CGPoint] {
         let avarageLength = pathLength(points: points) / CGFloat((totalPoints - 1))
         var currentLength = CGFloat(0)
         var actualPoints = points
@@ -66,7 +111,7 @@ public class Stroke {
         return newPoints
     }
     
-    func pathLength(points: [CGPoint]) -> CGFloat {
+    static func pathLength(points: [CGPoint]) -> CGFloat {
         var length = CGFloat(0)
         for i in 1 ..< points.count {
             length += points[i].distanceTo(point: points[i - 1])
@@ -74,7 +119,7 @@ public class Stroke {
         return length
     }
     
-    func centroid(points: [CGPoint]) -> CGPoint {
+    static func centroid(points: [CGPoint]) -> CGPoint {
         var totalWidth = CGFloat(0)
         var totalHeigth = CGFloat(0)
         for point in points {

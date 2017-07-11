@@ -14,12 +14,16 @@ final class DrawingViewController: UIViewController {
     @IBOutlet weak var drawSpace: UIImageView!
     
     //MARK:- Variables
+    private var points = [CGPoint]()
     private var lastPoint = CGPoint.zero
     private var isSwiping = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        print(acos(CGFloat(1)))
+        print(acos(CGFloat(90)))
+        print(acos(CGFloat(45)))
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,6 +35,7 @@ final class DrawingViewController: UIViewController {
         isSwiping = false
         if let touch = touches.first {
             lastPoint = touch.location(in: self.view)
+            points.append(lastPoint)
         }
     }
     
@@ -38,6 +43,8 @@ final class DrawingViewController: UIViewController {
         isSwiping = true
         if let touch = touches.first {
             let currentPoint = touch.location(in: self.view)
+            points.append(currentPoint)
+            print(currentPoint)
             drawLine(from: lastPoint, to: currentPoint)
             lastPoint = currentPoint
         }
@@ -46,6 +53,7 @@ final class DrawingViewController: UIViewController {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !isSwiping {
             drawLine(from: lastPoint, to: lastPoint)
+            print("STOP")
         }
     }
     

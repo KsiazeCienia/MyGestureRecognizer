@@ -20,6 +20,7 @@
 		D30874CC1F13CECC00341ECB /* PowerOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30874CB1F13CECC00341ECB /* PowerOf.swift */; };
 		D30874CE1F13F04000341ECB /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30874CD1F13F04000341ECB /* CGFloat.swift */; };
 		D30874D01F14088500341ECB /* DrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30874CF1F14088500341ECB /* DrawView.swift */; };
+		D33E8F8D1F153BEE00A5474E /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33E8F8C1F153BEE00A5474E /* BoundingBox.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		D30874CB1F13CECC00341ECB /* PowerOf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PowerOf.swift; sourceTree = "<group>"; };
 		D30874CD1F13F04000341ECB /* CGFloat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
 		D30874CF1F14088500341ECB /* DrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawView.swift; sourceTree = "<group>"; };
+		D33E8F8C1F153BEE00A5474E /* BoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 			children = (
 				D30874C71F11638800341ECB /* Stroke.swift */,
 				D30874C91F116BE200341ECB /* Unistroke.swift */,
+				D33E8F8C1F153BEE00A5474E /* BoundingBox.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 				D30874B91F0ADC2100341ECB /* DrawingViewController.swift in Sources */,
 				D30874C01F0ADD6600341ECB /* MyGestureRecognizer.xcdatamodeld in Sources */,
 				D30874CC1F13CECC00341ECB /* PowerOf.swift in Sources */,
+				D33E8F8D1F153BEE00A5474E /* BoundingBox.swift in Sources */,
 				D30874CA1F116BE200341ECB /* Unistroke.swift in Sources */,
 				D30874C41F11600700341ECB /* CGPoint.swift in Sources */,
 				D308749C1F0AD95D00341ECB /* AppDelegate.swift in Sources */,
