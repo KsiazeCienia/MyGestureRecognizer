@@ -26,6 +26,7 @@
 		D33E8FAD1F16623800A5474E /* GestureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33E8FAB1F16623800A5474E /* GestureTableViewCell.swift */; };
 		D33E8FAE1F16623800A5474E /* GestureTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33E8FAC1F16623800A5474E /* GestureTableViewCell.xib */; };
 		D33E8FB01F1662B200A5474E /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33E8FAF1F1662B200A5474E /* UITableViewCell.swift */; };
+		D33E8FB81F16682C00A5474E /* AddGestureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33E8FB71F16682C00A5474E /* AddGestureViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		D33E8FAB1F16623800A5474E /* GestureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureTableViewCell.swift; sourceTree = "<group>"; };
 		D33E8FAC1F16623800A5474E /* GestureTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GestureTableViewCell.xib; sourceTree = "<group>"; };
 		D33E8FAF1F1662B200A5474E /* UITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
+		D33E8FB71F16682C00A5474E /* AddGestureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddGestureViewController.swift; path = ViewControllers/AddGestureViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +159,7 @@
 			children = (
 				D30874B81F0ADC2100341ECB /* DrawingViewController.swift */,
 				D33E8FA81F16609300A5474E /* GestureListViewController.swift */,
+				D33E8FB71F16682C00A5474E /* AddGestureViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D33E8FB81F16682C00A5474E /* AddGestureViewController.swift in Sources */,
 				D33E8FB01F1662B200A5474E /* UITableViewCell.swift in Sources */,
 				D30874B91F0ADC2100341ECB /* DrawingViewController.swift in Sources */,
 				D30874C01F0ADD6600341ECB /* MyGestureRecognizer.xcdatamodeld in Sources */,

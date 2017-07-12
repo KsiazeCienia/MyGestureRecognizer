@@ -10,13 +10,12 @@ import UIKit
 
 public class Unistroke {
     
-    let size = CGFloat(250)
-    let alpha = CGFloat(30)
-    let n = 96
-    //MARK:- TODO w radianach
-    let theta = CGFloat(45).toRadians()
-    let negativeTheta = CGFloat(-45).toRadians()
-    let delta = CGFloat(2).toRadians()
+    static let size = CGFloat(250)
+    static let alpha = CGFloat(30)
+    static let n = 96
+    static let theta = CGFloat(45).toRadians()
+    static let negativeTheta = CGFloat(-45).toRadians()
+    static let delta = CGFloat(2).toRadians()
     
     var strokesOrder = [Int]()
     var permuteStrokeOrders = [Int]()
