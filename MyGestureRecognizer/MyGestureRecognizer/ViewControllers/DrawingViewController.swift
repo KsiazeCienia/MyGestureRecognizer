@@ -15,15 +15,13 @@ final class DrawingViewController: UIViewController {
     
     //MARK:- Variables
     private var points = [CGPoint]()
+    private var template = [CGPoint]()
     private var lastPoint = CGPoint.zero
     private var isSwiping = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        print(acos(CGFloat(1)))
-        print(acos(CGFloat(90)))
-        print(acos(CGFloat(45)))
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,8 +51,26 @@ final class DrawingViewController: UIViewController {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !isSwiping {
             drawLine(from: lastPoint, to: lastPoint)
-            print("STOP")
         }
+        print("STOP")
+        if (template.isEmpty) {
+            template = points
+            points.removeAll()
+        } else {
+            let unistroke = Unistroke()
+            let stroke = Stroke(points: template)
+            unistroke.generateUnistrokePermutations(strokes: [stroke])
+            
+            points = Stroke.resample(points: points, totalPoints: 96)
+            let radians = Stroke.indicativeAngle(points: points)
+            points = Stroke.rotateBy(points: points, radians: -radians)
+            let vector = Stroke.calculateStartUnitVector(points: points)
+            
+            let (match, score) = unistroke.recoginze(points: points, vector: vector, n: 3, multistrokes: [unistroke.unistrokes])
+            print(score)
+            print(match)
+        }
+        
     }
     
     private func drawLine(from: CGPoint, to: CGPoint) {

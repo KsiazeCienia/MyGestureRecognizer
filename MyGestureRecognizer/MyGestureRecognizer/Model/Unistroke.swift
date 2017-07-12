@@ -11,7 +11,7 @@ import UIKit
 public class Unistroke {
     
     let size = CGFloat(250)
-    let alpha = 30
+    let alpha = CGFloat(30)
     let n = 96
     //MARK:- TODO w radianach
     let theta = CGFloat(45).toRadians()
@@ -43,8 +43,8 @@ public class Unistroke {
         for multistroke in multistrokes {
             for unistroke in multistroke {
                 let unistrokeVector = Stroke.calculateStartUnitVector(points: unistroke.points)
-                if angleBetweenVectors(a: vector, b: unistrokeVector) < CGFloat(alpha / 180) {
-                   length = Stroke.distanceAtBestAngle(points: points, templatePoints: unistroke.points, fromAngle: negativeTheta, toAngle: theta, delta: delta)
+                if angleBetweenVectors(a: vector, b: unistrokeVector) < alpha.toRadians() {
+                   length = Stroke.distanceAtBestAngle(points: points, templatePoints: unistroke.points, fromAngle: negativeTheta, toAngle: theta, delta: 0.8)
                     //MARK:- TODO sprwdzić
                     if length < b {
                         b = length
@@ -53,7 +53,7 @@ public class Unistroke {
                 }
             }
         }
-        let score = 1 - length/(0.5*sqrt(size*size + size*size))
+        let score = 1 - b/(0.5*sqrt(size*size + size*size))
         return (bestStroke, score)
     }
     

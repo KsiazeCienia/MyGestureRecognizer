@@ -37,10 +37,12 @@ public class Stroke {
     //MARK:- TODO pamiętać o radianach
     static func rotateBy(points: [CGPoint], radians: CGFloat) -> [CGPoint] {
         let center = centroid(points: points)
+        let cosvalue = cos(radians)
+        let sinvalue = sin(radians)
         var newPoints = [CGPoint]()
         for point in points {
-            let x = (point.x - center.x)*cos(radians) - (point.y - center.y)*sin(radians) + center.x
-            let y = (point.x - center.x)*sin(radians) + (point.y - center.y)*cos(radians) + center.y
+            let x = (point.x - center.x)*cosvalue - (point.y - center.y)*sinvalue + center.x
+            let y = (point.x - center.x)*sinvalue + (point.y - center.y)*cosvalue + center.y
             newPoints.append(CGPoint(x: x, y: y))
         }
         return newPoints
@@ -79,10 +81,11 @@ public class Stroke {
     
     static func pathDistance(points: [CGPoint], templatePoints: [CGPoint]) -> CGFloat {
         var length = CGFloat(0)
-        for i in 0 ..< points.count {
+        let count = min(points.count, templatePoints.count)
+        for i in 0 ..< count {
             length += points[i].distanceTo(point: templatePoints[i])
         }
-        return length / CGFloat(points.count)
+        return (length / CGFloat(count))
     }
     
     static func indicativeAngle(points: [CGPoint]) -> CGFloat {
