@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+struct Segues {
+    static let goToAddGesture = "goToAddGesture"
+}

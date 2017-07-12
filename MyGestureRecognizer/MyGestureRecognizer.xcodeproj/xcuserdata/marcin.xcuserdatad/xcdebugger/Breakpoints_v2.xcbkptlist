@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyGestureRecognizer/Model/Unistroke.swift"
-            timestampString = "521543395.1144"
+            timestampString = "521561587.178935"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "recoginze(points:vector:n:multistrokes:)"
             landmarkType = "7">
          </BreakpointContent>
