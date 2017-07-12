@@ -57,7 +57,7 @@ final class DrawingViewController: UIViewController {
             template = points
             points.removeAll()
         } else {
-            let unistroke = Unistroke()
+            let unistroke = Unistroke(name: "da")
             let stroke = Stroke(points: template)
             unistroke.generateUnistrokePermutations(strokes: [stroke])
             

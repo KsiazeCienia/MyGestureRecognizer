@@ -21,6 +21,11 @@ public class Unistroke {
     var strokesOrder = [Int]()
     var permuteStrokeOrders = [Int]()
     var unistrokes = [Stroke]()
+    var name: String
+    
+    init(name: String) {
+        self.name = name
+    }
     
     func generateUnistrokePermutations(strokes: [Stroke]) {
         for i in 0 ..< strokes.count {
