@@ -27,6 +27,11 @@ public class Unistroke {
         self.name = name
     }
     
+    init(name: String, strokes: [Stroke]) {
+        self.name = name
+        self.unistrokes = strokes
+    }
+    
     func generateUnistrokePermutations(strokes: [Stroke]) {
         for i in 0 ..< strokes.count {
             strokesOrder.append(i)

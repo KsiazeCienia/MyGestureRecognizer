@@ -17,25 +17,66 @@ final class Database {
         let gesture = Gesture(context: context)
         gesture.name = unistroke.name
         for stroke in unistroke.unistrokes {
-            gesture.addToStrokes(addStroke(points: stroke.points))
+            gesture.addToStrokes(convertStroke(points: stroke.points))
         }
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
-    func addStroke(points: [CGPoint]) -> StrokeDatabase {
+    func convertStroke(points: [CGPoint]) -> StrokeDatabase {
         let databaseStroke = StrokeDatabase(context: context)
         for point in points {
-            databaseStroke.addToPoints(addPoint(point: point))
-            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            databaseStroke.addToPoints(convertPoint(point: point))
         }
         return databaseStroke
     }
     
-    func addPoint(point: CGPoint) -> Point {
+    func convertPoint(point: CGPoint) -> Point {
         let databasePoint = Point(context: context)
         databasePoint.x = Float(point.x)
         databasePoint.y = Float(point.y)
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
         return databasePoint
     }
+    
+    func getUnistrokes() -> [Unistroke] {
+        var gestures = [Gesture]()
+        var unistrokes = [Unistroke]()
+        do {
+            gestures = try context.fetch(Gesture.fetchRequest())
+        } catch {
+            print("Fetching failed")
+        }
+        
+        for gesture in gestures {
+            if let actualStrokes = gesture.strokes?.allObjects {
+                let strokes = parseStrokes(databaseStrokes: (actualStrokes as! [StrokeDatabase]))
+                if let actualName = gesture.name {
+                    let unistroke = Unistroke(name: actualName, strokes: strokes)
+                    unistrokes.append(unistroke)
+                }
+            }
+        }
+        return unistrokes
+    }
+    
+    func parseStrokes(databaseStrokes: [StrokeDatabase]) -> [Stroke] {
+        var strokes = [Stroke]()
+        for stroke in databaseStrokes {
+            if let actualPoints = stroke.points?.allObjects {
+                let parsedPoints = parsePoints(databasePoints: (actualPoints as! [Point]))
+                strokes.append(Stroke(points: parsedPoints))
+            }
+        }
+        return strokes
+    }
+    
+    func parsePoints(databasePoints: [Point]) -> [CGPoint] {
+        var points = [CGPoint]()
+        for databasePoint in databasePoints {
+            let point = CGPoint(x: CGFloat(databasePoint.x), y: CGFloat(databasePoint.y))
+            points.append(point)
+        }
+        return points
+    }
+    
     
 }
