@@ -2,21 +2,22 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Gesture" representedClassName="Gesture" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="strokes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="StrokeDatabase" inverseName="gesture" inverseEntity="StrokeDatabase" syncable="YES"/>
+        <attribute name="numberOfStrokes" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="unistrokes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UnistrokeDatabase" inverseName="gesture" inverseEntity="UnistrokeDatabase" syncable="YES"/>
     </entity>
     <entity name="Point" representedClassName="Point" syncable="YES" codeGenerationType="class">
         <attribute name="x" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="y" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="stroke" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StrokeDatabase" inverseName="points" inverseEntity="StrokeDatabase" syncable="YES"/>
+        <relationship name="unistroke" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UnistrokeDatabase" inverseName="points" inverseEntity="UnistrokeDatabase" syncable="YES"/>
     </entity>
-    <entity name="StrokeDatabase" representedClassName="StrokeDatabase" syncable="YES" codeGenerationType="class">
+    <entity name="UnistrokeDatabase" representedClassName="UnistrokeDatabase" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="gesture" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Gesture" inverseName="strokes" inverseEntity="Gesture" syncable="YES"/>
-        <relationship name="points" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Point" inverseName="stroke" inverseEntity="Point" syncable="YES"/>
+        <relationship name="gesture" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Gesture" inverseName="unistrokes" inverseEntity="Gesture" syncable="YES"/>
+        <relationship name="points" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Point" inverseName="unistroke" inverseEntity="Point" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Point" positionX="-54" positionY="-9" width="128" height="88"/>
-        <element name="StrokeDatabase" positionX="162" positionY="-6" width="128" height="88"/>
-        <element name="Gesture" positionX="369" positionY="-0" width="128" height="73"/>
+        <element name="Point" positionX="-36" positionY="-0" width="128" height="88"/>
+        <element name="UnistrokeDatabase" positionX="162" positionY="-6" width="128" height="88"/>
+        <element name="Gesture" positionX="369" positionY="-0" width="128" height="88"/>
     </elements>
 </model>

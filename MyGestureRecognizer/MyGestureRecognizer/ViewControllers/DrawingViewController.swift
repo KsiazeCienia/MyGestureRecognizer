@@ -25,8 +25,9 @@ final class DrawingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //MARK: - TODO potem usunać
-        database.removeAll()
+        //database.removeAll()
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -63,15 +64,15 @@ final class DrawingViewController: UIViewController {
             drawLine(from: lastPoint, to: lastPoint)
         }
         print("STOP")
-        if points.count < 12 {
-            //komunkat o zbyt małej ilośći znaków 
-            return
+        if points.count <= 12 {
+            //komunkat o zbyt małej ilośći znaków
+        } else {
+            let stroke = Stroke(points: points)
+            strokes.append(stroke)
+            points.removeAll()
+            let (match, score) = Stroke.recoginze(strokes: strokes, multistrokes: database.getMultistrokes())
+            label.text = match + " " +  String(describing: score)
         }
-        let stroke = Stroke(points: points)
-        strokes.append(stroke)
-        points.removeAll()
-        let (match, score) = Unistroke.recoginze(strokes: strokes, multistrokes: database.getUnistrokes())
-        label.text = match + " " +  String(describing: score)
     }
     
     private func drawLine(from: CGPoint, to: CGPoint) {

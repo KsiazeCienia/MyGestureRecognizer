@@ -10,8 +10,8 @@ import UIKit
 
 extension CGPoint {
     func distanceTo(point: CGPoint) -> CGFloat {
-        let x = self.x - point.x
-        let y = self.y - point.y
+        let x = point.x - self.x
+        let y = point.y - self.y
         return sqrt(x * x + y * y)
     }
 }

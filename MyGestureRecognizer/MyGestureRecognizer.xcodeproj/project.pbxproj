@@ -27,6 +27,7 @@
 		D33E8FAE1F16623800A5474E /* GestureTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33E8FAC1F16623800A5474E /* GestureTableViewCell.xib */; };
 		D33E8FB01F1662B200A5474E /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33E8FAF1F1662B200A5474E /* UITableViewCell.swift */; };
 		D33E8FB81F16682C00A5474E /* AddGestureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33E8FB71F16682C00A5474E /* AddGestureViewController.swift */; };
+		D33E8FBA1F17EDBC00A5474E /* Multistroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33E8FB91F17EDBC00A5474E /* Multistroke.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		D33E8FAC1F16623800A5474E /* GestureTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GestureTableViewCell.xib; sourceTree = "<group>"; };
 		D33E8FAF1F1662B200A5474E /* UITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
 		D33E8FB71F16682C00A5474E /* AddGestureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddGestureViewController.swift; path = ViewControllers/AddGestureViewController.swift; sourceTree = "<group>"; };
+		D33E8FB91F17EDBC00A5474E /* Multistroke.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Multistroke.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +172,7 @@
 				D30874C71F11638800341ECB /* Stroke.swift */,
 				D30874C91F116BE200341ECB /* Unistroke.swift */,
 				D33E8F8C1F153BEE00A5474E /* BoundingBox.swift */,
+				D33E8FB91F17EDBC00A5474E /* Multistroke.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D33E8FB81F16682C00A5474E /* AddGestureViewController.swift in Sources */,
+				D33E8FBA1F17EDBC00A5474E /* Multistroke.swift in Sources */,
 				D33E8FB01F1662B200A5474E /* UITableViewCell.swift in Sources */,
 				D30874B91F0ADC2100341ECB /* DrawingViewController.swift in Sources */,
 				D30874C01F0ADD6600341ECB /* MyGestureRecognizer.xcdatamodeld in Sources */,

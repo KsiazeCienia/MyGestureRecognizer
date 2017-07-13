@@ -14,7 +14,7 @@ class GestureListViewController: UIViewController {
     
     private let database = Database()
     
-    fileprivate var unistrokes = [Unistroke]()
+    fileprivate var multistrokes = [Multistroke]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,7 @@ class GestureListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        unistrokes = database.getUnistrokes()
+        multistrokes = database.getMultistrokes()
         tableView.reloadData()
     }
 
@@ -42,15 +42,15 @@ class GestureListViewController: UIViewController {
 extension GestureListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return unistrokes.count + 1
+        return multistrokes.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let gestureLabel = tableView.dequeueReusableCell(withIdentifier: GestureTableViewCell.identifier) as! GestureTableViewCell
         
-        if indexPath.row < unistrokes.count {
-            gestureLabel.label.text = unistrokes[indexPath.row].name
+        if indexPath.row < multistrokes.count {
+            gestureLabel.label.text = multistrokes[indexPath.row].name
         } else {
             gestureLabel.label.text = "Dodaj gest"
         }
@@ -58,7 +58,7 @@ extension GestureListViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row >= unistrokes.count {
+        if indexPath.row >= multistrokes.count {
             performSegue(withIdentifier: Segues.goToAddGesture, sender: nil)
         }
     }

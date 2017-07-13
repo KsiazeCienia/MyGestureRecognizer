@@ -11,6 +11,11 @@ import UIKit
 public class Stroke {
     
     static let size = CGFloat(250)
+    static let theta = CGFloat(45).toRadians()
+    static let negativeTheta = CGFloat(-45).toRadians()
+    static let delta = CGFloat(2).toRadians()
+    static let alpha = CGFloat(30).toRadians()
+
     //SPROBOWAĆ MANIPULOWAĆ MIĘDZY 0.20-0.35
     static let threshold = CGFloat(0.3)
     static let n = 96
@@ -46,6 +51,12 @@ public class Stroke {
         return CGPoint(x: vx, y: vy)
     }
     
+//    static func optimalCosineDistance(v1: [CGPoint], v2: [CGPoint]) -> CGFloat {
+//        var a = CGFloat(0)
+//        var b = CGFloat(0)
+//        for i in 0 ..<
+//    }
+//    
     //SPRAWDZONE
     static func scaleToDim(points: [CGPoint]) -> [CGPoint] {
         let boundingBox = BoundingBox(points: points)
@@ -127,24 +138,27 @@ public class Stroke {
         return atan2(center.y - points[0].y, center.x - points[0].x)
     }
     
-    //MOŻE POWSTAĆ BUG A PROPO DODANIA OSTATNIEJ WARTOŚĆI
+    //SPRAWDZONE
     static func resample(points: [CGPoint], totalPoints: Int) -> [CGPoint] {
-        let avarageLength = pathLength(points: points) / CGFloat((totalPoints - 1))
-        var currentLength = CGFloat(0)
-        var actualPoints = points
+        var initialPoints = points
+        let interval = pathLength(points: initialPoints) / CGFloat(totalPoints - 1)
+        var totalLength = CGFloat(0)
         var newPoints = [points[0]]
-        for i in 1 ..< actualPoints.count {
-            let length = actualPoints[i].distanceTo(point: points[i - 1])
-            if (currentLength + length) >= avarageLength {
-                let x = actualPoints[i - 1].x + ((avarageLength - currentLength) / length) * (actualPoints[i].x - actualPoints[i - 1].x)
-                let y = actualPoints[i - 1].x + ((avarageLength - currentLength) / length) * (actualPoints[i].y - actualPoints[i - 1].y)
-                let q = CGPoint(x: x, y: y)
+        for i in 1 ..< initialPoints.count {
+            let currentLength = initialPoints[i-1].distanceTo(point: initialPoints[i])
+            if ((totalLength + currentLength) >= interval) {
+                let qx = initialPoints[i-1].x + ((interval - totalLength) / currentLength) * (initialPoints[i].x - initialPoints[i-1].x)
+                let qy = initialPoints[i-1].y + ((interval - totalLength) / currentLength) * (initialPoints[i].y - initialPoints[i-1].y)
+                let q = CGPoint(x: qx, y: qy)
                 newPoints.append(q)
-                actualPoints[i] = q
-                currentLength = CGFloat(0)
+                initialPoints.insert(q, at: i)
+                totalLength = CGFloat(0)
             } else {
-                currentLength += length
+                totalLength += currentLength
             }
+        }
+        if newPoints.count == totalPoints-1 {
+            newPoints.append(points.last!)
         }
         return newPoints
     }
@@ -167,5 +181,51 @@ public class Stroke {
             totalHeigth += point.y
         }
         return CGPoint(x: (totalWidth / CGFloat(points.count)), y: (totalHeigth / CGFloat(points.count)))
+    }
+    
+    //UPEWNIC SIĘ
+    static func angleBetweenVectors(a: CGPoint, b: CGPoint) -> CGFloat {
+        return acos(a.x * b.x + a.y * b.y)
+    }
+    
+    //SPRWDZONE
+    static func combineStrokes(strokes: [Stroke]) -> [CGPoint] {
+        var points = [CGPoint]()
+        for stroke in strokes {
+            points += stroke.points
+        }
+        return points
+    }
+    
+    static func recoginze(strokes: [Stroke], multistrokes: [Multistroke]) -> (String, CGFloat) {
+        
+        var points = Stroke.combineStrokes(strokes: strokes)
+        points = Stroke.resample(points: points, totalPoints: Multistroke.n)
+        let radians = Stroke.indicativeAngle(points: points)
+        points = Stroke.rotateBy(points: points, radians: -radians)
+        points = Stroke.scaleToDim(points: points)
+        points = Stroke.translateTo(points: points)
+        let startVector = Stroke.calculateStartUnitVector(points: points)
+    
+        var b = CGFloat.infinity
+        var bestStroke = ""
+        var distance = CGFloat(0)
+        for multistroke in multistrokes {
+            if multistroke.numberOfStrokes == strokes.count {
+                for unistroke in multistroke.unistrokes {
+                    let strokeVector = Stroke.calculateStartUnitVector(points: unistroke.points)
+                    if ((angleBetweenVectors(a: startVector, b: strokeVector)) < alpha) {
+                        distance = Stroke.distanceAtBestAngle(points: points, templatePoints: unistroke.points, fromAngle: Stroke.negativeTheta, toAngle: Stroke.theta, delta: delta)
+                        //MARK:- TODO sprwdzić
+                        if distance < b {
+                            b = distance
+                            bestStroke = multistroke.name
+                        }
+                    }
+                }
+            }
+        }
+        let score = 1 - b/(0.5*sqrt(Stroke.size*Stroke.size + Stroke.size*Stroke.size))
+        return (bestStroke, score)
     }
 }

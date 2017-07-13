@@ -29,8 +29,8 @@ class AddGestureViewController: UIViewController {
                     return
                 }
             }
-            let unistroke = Unistroke(name: name, strokes: strokes)
-            database.addGesture(unistroke: unistroke)
+            let multistroke = Multistroke(name: name, strokes: strokes)
+            database.addGesture(multistroke: multistroke)
         } else {
             //MARK:- TODO wyświetlić komuniakt o podani nazwy
         }

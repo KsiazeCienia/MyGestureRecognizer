@@ -13,13 +13,14 @@ final class Database {
     
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    //MARK:- TODO poprawić
     func removeAll() {
         let DelAllPoints = NSBatchDeleteRequest(fetchRequest: NSFetchRequest<NSFetchRequestResult>(entityName: "Point"))
-        let DelAllStrokes = NSBatchDeleteRequest(fetchRequest: NSFetchRequest<NSFetchRequestResult>(entityName: "StrokeDatabase"))
+        let DelAllUnistroke = NSBatchDeleteRequest(fetchRequest: NSFetchRequest<NSFetchRequestResult>(entityName: "UnistrokeDatabase"))
         let DelAllGestures = NSBatchDeleteRequest(fetchRequest: NSFetchRequest<NSFetchRequestResult>(entityName: "Gesture"))
         do {
             try context.execute(DelAllPoints)
-            try context.execute(DelAllStrokes)
+            try context.execute(DelAllUnistroke)
             try context.execute(DelAllGestures)
         }
         catch {
@@ -27,21 +28,22 @@ final class Database {
         }
     }
     
-    func addGesture(unistroke: Unistroke) {
+    func addGesture(multistroke: Multistroke) {
         let gesture = Gesture(context: context)
-        gesture.name = unistroke.name
-        for stroke in unistroke.strokes {
-            gesture.addToStrokes(convertStroke(points: stroke.points))
+        gesture.name = multistroke.name
+        gesture.numberOfStrokes = Int16(multistroke.numberOfStrokes)
+        for unistroke in multistroke.unistrokes {
+            gesture.addToUnistrokes(convertUnistroke(points: unistroke.points))
         }
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
-    func convertStroke(points: [CGPoint]) -> StrokeDatabase {
-        let databaseStroke = StrokeDatabase(context: context)
+    func convertUnistroke(points: [CGPoint]) -> UnistrokeDatabase {
+        let databaseUnistroke = UnistrokeDatabase(context: context)
         for point in points {
-            databaseStroke.addToPoints(convertPoint(point: point))
+            databaseUnistroke.addToPoints(convertPoint(point: point))
         }
-        return databaseStroke
+        return databaseUnistroke
     }
     
     func convertPoint(point: CGPoint) -> Point {
@@ -51,9 +53,9 @@ final class Database {
         return databasePoint
     }
     
-    func getUnistrokes() -> [Unistroke] {
+    func getMultistrokes() -> [Multistroke] {
         var gestures = [Gesture]()
-        var unistrokes = [Unistroke]()
+        var multistrokes = [Multistroke]()
         do {
             gestures = try context.fetch(Gesture.fetchRequest())
         } catch {
@@ -61,26 +63,26 @@ final class Database {
         }
         
         for gesture in gestures {
-            if let actualStrokes = gesture.strokes?.allObjects {
-                let strokes = parseStrokes(databaseStrokes: (actualStrokes as! [StrokeDatabase]))
+            if let actualUnistrokes = gesture.unistrokes?.allObjects {
+                let unistrokes = parsedUnistrokes(databaseUnistrokes: (actualUnistrokes as! [UnistrokeDatabase]))
                 if let actualName = gesture.name {
-                    let unistroke = Unistroke(name: actualName, withPermutatedStrokes: strokes)
-                    unistrokes.append(unistroke)
+                    let multistroke = Multistroke(name: actualName, unistrokes: unistrokes, numberOfStrokes: Int(gesture.numberOfStrokes))
+                    multistrokes.append(multistroke)
                 }
             }
         }
-        return unistrokes
+        return multistrokes
     }
     
-    func parseStrokes(databaseStrokes: [StrokeDatabase]) -> [Stroke] {
-        var strokes = [Stroke]()
-        for stroke in databaseStrokes {
-            if let actualPoints = stroke.points?.allObjects {
+    func parsedUnistrokes(databaseUnistrokes: [UnistrokeDatabase]) -> [Unistroke] {
+        var unistrokes = [Unistroke]()
+        for unistroke in databaseUnistrokes {
+            if let actualPoints = unistroke.points?.allObjects {
                 let parsedPoints = parsePoints(databasePoints: (actualPoints as! [Point]))
-                strokes.append(Stroke(points: parsedPoints))
+                unistrokes.append(Unistroke(points: parsedPoints))
             }
         }
-        return strokes
+        return unistrokes
     }
     
     func parsePoints(databasePoints: [Point]) -> [CGPoint] {

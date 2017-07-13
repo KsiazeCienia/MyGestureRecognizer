@@ -17,8 +17,8 @@ struct BoundingBox {
     init(points: [CGPoint]) {
         minX = CGFloat.infinity
         minY = CGFloat.infinity
-        maxX = CGFloat(0)
-        maxY = CGFloat(0)
+        maxX = -CGFloat.infinity
+        maxY = -CGFloat.infinity
         for point in points {
             minX = min(point.x, minX)
             minY = min(point.y, minY)
