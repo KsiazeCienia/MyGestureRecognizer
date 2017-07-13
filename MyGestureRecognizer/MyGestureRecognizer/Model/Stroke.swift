@@ -13,7 +13,7 @@ public class Stroke {
     static let size = CGFloat(250)
     static let theta = CGFloat(45).toRadians()
     static let negativeTheta = CGFloat(-45).toRadians()
-    static let delta = CGFloat(2).toRadians()
+    static let delta = CGFloat(0.8)
     static let alpha = CGFloat(30).toRadians()
 
     //SPROBOWAĆ MANIPULOWAĆ MIĘDZY 0.20-0.35
@@ -33,7 +33,6 @@ public class Stroke {
         let center = Stroke.centroid(points: points)
         let zeroPoint = CGPoint.zero
         var newPoints = [CGPoint]()
-        print(zeroPoint)
         for point in points {
             let x = point.x + zeroPoint.x - center.x
             let y = point.y + zeroPoint.y - center.y
@@ -144,7 +143,9 @@ public class Stroke {
         let interval = pathLength(points: initialPoints) / CGFloat(totalPoints - 1)
         var totalLength = CGFloat(0)
         var newPoints = [points[0]]
-        for i in 1 ..< initialPoints.count {
+        var i = 1
+        while (newPoints.count != 96)&&(initialPoints.count > i) {
+           // for i in 1 ..< initialPoints.count {
             let currentLength = initialPoints[i-1].distanceTo(point: initialPoints[i])
             if ((totalLength + currentLength) >= interval) {
                 let qx = initialPoints[i-1].x + ((interval - totalLength) / currentLength) * (initialPoints[i].x - initialPoints[i-1].x)
@@ -156,6 +157,8 @@ public class Stroke {
             } else {
                 totalLength += currentLength
             }
+            i += 1
+            //}
         }
         if newPoints.count == totalPoints-1 {
             newPoints.append(points.last!)
@@ -167,7 +170,7 @@ public class Stroke {
     static func pathLength(points: [CGPoint]) -> CGFloat {
         var length = CGFloat(0)
         for i in 1 ..< points.count {
-            length += points[i].distanceTo(point: points[i - 1])
+            length += points[i - 1].distanceTo(point: points[i])
         }
         return length
     }

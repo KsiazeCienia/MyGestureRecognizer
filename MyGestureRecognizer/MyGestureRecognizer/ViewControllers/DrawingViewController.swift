@@ -25,7 +25,7 @@ final class DrawingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //MARK: - TODO potem usunać
-        //database.removeAll()
+        database.removeAll()
     }
     
     
