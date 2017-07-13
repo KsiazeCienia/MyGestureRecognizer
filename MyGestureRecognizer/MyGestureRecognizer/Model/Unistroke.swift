@@ -17,9 +17,9 @@ public class Unistroke {
     static let negativeTheta = CGFloat(-45).toRadians()
     static let delta = CGFloat(2).toRadians()
     
-    var strokesOrder = [Int]()
-    var permuteStrokeOrders = [Int]()
-    var unistrokes = [Stroke]()
+    private var strokesOrder = [Int]()
+    private var permuteStrokeOrders = [Int]()
+    var strokes = [Stroke]()
     var name: String
     
     init(name: String) {
@@ -28,22 +28,28 @@ public class Unistroke {
     
     init(name: String, strokes: [Stroke]) {
         self.name = name
-        self.unistrokes = strokes
+        self.strokes = strokes
+        generateUnistrokePermutations()
     }
     
-    func generateUnistrokePermutations(strokes: [Stroke]) {
+    init(name: String, withPermutatedStrokes strokes: [Stroke]) {
+        self.name = name
+        self.strokes = strokes
+    }
+    
+    func generateUnistrokePermutations() {
         for i in 0 ..< strokes.count {
             strokesOrder.append(i)
         }
         heapPermute(n: strokesOrder.count)
-        makeUnistroke(strokes: strokes)
-        for unistroke in unistrokes {
-            unistroke.points = Stroke.resample(points: unistroke.points, totalPoints: Unistroke.n)
-            let radians = Stroke.indicativeAngle(points: unistroke.points)
-            unistroke.points = Stroke.rotateBy(points: unistroke.points, radians: -radians)
-            unistroke.points = Stroke.scaleToDim(points: unistroke.points)
+        makeUnistroke()
+        for stroke in strokes {
+            stroke.points = Stroke.resample(points: stroke.points, totalPoints: Unistroke.n)
+            let radians = Stroke.indicativeAngle(points: stroke.points)
+            stroke.points = Stroke.rotateBy(points: stroke.points, radians: -radians)
+            stroke.points = Stroke.scaleToDim(points: stroke.points)
             //MARK:TODO brak checkRestoreOrientation
-            unistroke.points = Stroke.translateTo(points: unistroke.points)
+            stroke.points = Stroke.translateTo(points: stroke.points)
         }
         
     }
@@ -53,10 +59,10 @@ public class Unistroke {
         var bestStroke = ""
         var length = CGFloat(0)
         for multistroke in multistrokes {
-            for unistroke in multistroke.unistrokes {
-                let unistrokeVector = Stroke.calculateStartUnitVector(points: unistroke.points)
-                if ((angleBetweenVectors(a: vector, b: unistrokeVector)) < alpha) {
-                   length = Stroke.distanceAtBestAngle(points: points, templatePoints: unistroke.points, fromAngle: negativeTheta, toAngle: theta, delta: 0.8)
+            for stroke in multistroke.strokes {
+                let strokeVector = Stroke.calculateStartUnitVector(points: stroke.points)
+                if ((angleBetweenVectors(a: vector, b: strokeVector)) < alpha) {
+                   length = Stroke.distanceAtBestAngle(points: points, templatePoints: stroke.points, fromAngle: negativeTheta, toAngle: theta, delta: 0.8)
                     //MARK:- TODO sprwdzić
                     if length < b {
                         b = length
@@ -75,7 +81,7 @@ public class Unistroke {
     }
     
     //MARK:- TODO sprawdzić bo coś szemrane
-    func makeUnistroke(strokes: [Stroke]) {
+    func makeUnistroke() {
         for _ in permuteStrokeOrders {
             for b in 0 ..< 2^^permuteStrokeOrders.count {
                 for i in 0 ..< permuteStrokeOrders.count {
@@ -88,7 +94,7 @@ public class Unistroke {
                     } else {
                         points = stroke.points
                     }
-                    unistrokes.append(Stroke(points: points))
+                    strokes.append(Stroke(points: points))
                 }
             }
         }
@@ -113,7 +119,7 @@ public class Unistroke {
         }
     }
     
-    func combineStrokes(strokes: [Stroke]) -> [CGPoint] {
+    static func combineStrokes(strokes: [Stroke]) -> [CGPoint] {
         var points = [CGPoint]()
         for stroke in strokes {
             points += stroke.points

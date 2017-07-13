@@ -13,7 +13,7 @@
         <!--Gesture List View Controller-->
         <scene sceneID="XlC-u8-15x">
             <objects>
-                <viewController id="Rlg-ex-Soe" customClass="GestureListViewController" customModule="MyGestureRecognizer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Rlg-ex-Soe" customClass="GestureListViewController" customModule="MyGestureRecognizer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aaT-h3-ofT"/>
                         <viewControllerLayoutGuide type="bottom" id="ewe-M7-z51"/>

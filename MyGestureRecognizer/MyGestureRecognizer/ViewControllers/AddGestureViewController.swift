@@ -23,8 +23,7 @@ class AddGestureViewController: UIViewController {
 
     @IBAction func saveButton(_ sender: Any) {
         if let name = textField.text {
-            let unistroke = Unistroke(name: name)
-            unistroke.generateUnistrokePermutations(strokes: strokes)
+            let unistroke = Unistroke(name: name, strokes: strokes)
             database.addGesture(unistroke: unistroke)
         } else {
             //MARK:- TODO wyświetlić komuniakt o podani nazwy

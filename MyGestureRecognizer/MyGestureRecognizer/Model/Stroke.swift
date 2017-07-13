@@ -18,12 +18,8 @@ public class Stroke {
     
     var points: [CGPoint]
     
-    public init(points: [CGPoint]) {
+    init(points: [CGPoint]) {
         self.points = points
-    }
-    
-    public func addPoint(point: CGPoint) {
-        points.append(point)
     }
     
     static func translateTo(points: [CGPoint]) -> [CGPoint] {

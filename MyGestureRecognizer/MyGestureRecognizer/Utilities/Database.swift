@@ -13,10 +13,24 @@ final class Database {
     
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    func removeAll() {
+        let DelAllPoints = NSBatchDeleteRequest(fetchRequest: NSFetchRequest<NSFetchRequestResult>(entityName: "Point"))
+        let DelAllStrokes = NSBatchDeleteRequest(fetchRequest: NSFetchRequest<NSFetchRequestResult>(entityName: "StrokeDatabase"))
+        let DelAllGestures = NSBatchDeleteRequest(fetchRequest: NSFetchRequest<NSFetchRequestResult>(entityName: "Gesture"))
+        do {
+            try context.execute(DelAllPoints)
+            try context.execute(DelAllStrokes)
+            try context.execute(DelAllGestures)
+        }
+        catch {
+            print(error)
+        }
+    }
+    
     func addGesture(unistroke: Unistroke) {
         let gesture = Gesture(context: context)
         gesture.name = unistroke.name
-        for stroke in unistroke.unistrokes {
+        for stroke in unistroke.strokes {
             gesture.addToStrokes(convertStroke(points: stroke.points))
         }
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
@@ -50,7 +64,7 @@ final class Database {
             if let actualStrokes = gesture.strokes?.allObjects {
                 let strokes = parseStrokes(databaseStrokes: (actualStrokes as! [StrokeDatabase]))
                 if let actualName = gesture.name {
-                    let unistroke = Unistroke(name: actualName, strokes: strokes)
+                    let unistroke = Unistroke(name: actualName, withPermutatedStrokes: strokes)
                     unistrokes.append(unistroke)
                 }
             }

@@ -24,7 +24,8 @@ final class DrawingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        //MARK: - TODO potem usunać
+        database.removeAll()
     }
     
     override func didReceiveMemoryWarning() {
@@ -60,12 +61,16 @@ final class DrawingViewController: UIViewController {
             drawLine(from: lastPoint, to: lastPoint)
         }
         print("STOP")
+        let stroke = Stroke(points: points)
+        strokes.append(stroke)
         
-        points = Stroke.resample(points: points, totalPoints: 96)
-        let radians = Stroke.indicativeAngle(points: points)
-        points = Stroke.rotateBy(points: points, radians: -radians)
-        let vector = Stroke.calculateStartUnitVector(points: points)
-        let (match, score) = Unistroke.recoginze(points: points, vector: vector, n: 3, multistrokes: database.getUnistrokes())
+//        points = Stroke.resample(points: points, totalPoints: 96)
+//        let radians = Stroke.indicativeAngle(points: points)
+//        points = Stroke.rotateBy(points: points, radians: -radians)
+        let vector = Stroke.calculateStartUnitVector(points: Unistroke.combineStrokes(strokes: strokes))
+        points.removeAll()
+        let (match, score) = Unistroke.recoginze(points: Unistroke.combineStrokes(strokes: strokes), vector: vector, n: 3, multistrokes: database.getUnistrokes())
+        label.text = match + " " +  String(describing: score)
     }
     
     private func drawLine(from: CGPoint, to: CGPoint) {
