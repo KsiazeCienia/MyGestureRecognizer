@@ -11,7 +11,7 @@ import UIKit
 public class Stroke {
     
     static let size = CGFloat(250)
-    static let alpha = CGFloat(30).toRadians()
+    static let threshold = CGFloat(0.3)
     static let n = 96
     static let i = 12
     static let phi = CGFloat((0.5)*(-1 + sqrt(5)))
@@ -26,6 +26,19 @@ public class Stroke {
         points.append(point)
     }
     
+    static func translateTo(points: [CGPoint]) -> [CGPoint] {
+        let center = Stroke.centroid(points: points)
+        let zeroPoint = CGPoint.zero
+        var newPoints = [CGPoint]()
+        print(zeroPoint)
+        for point in points {
+            let x = point.x + zeroPoint.x - center.x
+            let y = point.y + zeroPoint.y - center.y
+            newPoints.append(CGPoint(x: x, y: y))
+        }
+        return newPoints
+    }
+    
     static func calculateStartUnitVector(points: [CGPoint]) -> CGPoint {
         let x = points[i].x - points[0].x
         let y = points[i].y - points[0].y
@@ -38,7 +51,7 @@ public class Stroke {
         let boundingBox = BoundingBox(points: points)
         var newPoints = [CGPoint]()
         for point in points {
-            if min(boundingBox.getWidth()/boundingBox.getHeight(), boundingBox.getHeight()/boundingBox.getWidth()) <= alpha {
+            if min(boundingBox.getWidth()/boundingBox.getHeight(), boundingBox.getHeight()/boundingBox.getWidth()) <= threshold {
                 let x = (point.x * size)/max(boundingBox.getWidth(), boundingBox.getHeight())
                 let y = (point.y * size)/max(boundingBox.getWidth(), boundingBox.getHeight())
                 newPoints.append(CGPoint(x: x, y: y))
@@ -51,7 +64,6 @@ public class Stroke {
         return newPoints
     }
     
-    //MARK:- TODO pamiętać o radianach
     static func rotateBy(points: [CGPoint], radians: CGFloat) -> [CGPoint] {
         let center = centroid(points: points)
         let cosvalue = cos(radians)

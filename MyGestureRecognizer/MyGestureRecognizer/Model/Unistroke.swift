@@ -42,6 +42,8 @@ public class Unistroke {
             let radians = Stroke.indicativeAngle(points: unistroke.points)
             unistroke.points = Stroke.rotateBy(points: unistroke.points, radians: -radians)
             unistroke.points = Stroke.scaleToDim(points: unistroke.points)
+            //MARK:TODO brak checkRestoreOrientation
+            unistroke.points = Stroke.translateTo(points: unistroke.points)
         }
         
     }
