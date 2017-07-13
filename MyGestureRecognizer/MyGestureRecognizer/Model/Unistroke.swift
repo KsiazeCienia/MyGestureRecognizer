@@ -54,18 +54,26 @@ public class Unistroke {
         
     }
     
-    static func recoginze(points: [CGPoint], vector: CGPoint, n: Int, multistrokes: [Unistroke]) -> (String, CGFloat) {
+    static func recoginze(strokes: [Stroke], multistrokes: [Unistroke]) -> (String, CGFloat) {
+        
+        var points = Unistroke.combineStrokes(strokes: strokes)
+        points = Stroke.resample(points: points, totalPoints: points.count)
+        let radians = Stroke.indicativeAngle(points: points)
+        points = Stroke.rotateBy(points: points, radians: -radians)
+        points = Stroke.scaleToDim(points: points)
+        let startVector = Stroke.calculateStartUnitVector(points: points)
+        
         var b = CGFloat.infinity
         var bestStroke = ""
-        var length = CGFloat(0)
+        var distance = CGFloat(0)
         for multistroke in multistrokes {
             for stroke in multistroke.strokes {
                 let strokeVector = Stroke.calculateStartUnitVector(points: stroke.points)
-                if ((angleBetweenVectors(a: vector, b: strokeVector)) < alpha) {
-                   length = Stroke.distanceAtBestAngle(points: points, templatePoints: stroke.points, fromAngle: negativeTheta, toAngle: theta, delta: 0.8)
+                if ((angleBetweenVectors(a: startVector, b: strokeVector)) < alpha) {
+                   distance = Stroke.distanceAtBestAngle(points: points, templatePoints: stroke.points, fromAngle: negativeTheta, toAngle: theta, delta: 0.8)
                     //MARK:- TODO sprwdzić
-                    if length < b {
-                        b = length
+                    if distance < b {
+                        b = distance
                         bestStroke = multistroke.name
                     }
                 }
@@ -81,7 +89,7 @@ public class Unistroke {
     }
     
     //MARK:- TODO sprawdzić bo coś szemrane
-    func makeUnistroke() {
+    private func makeUnistroke() {
         for _ in permuteStrokeOrders {
             for b in 0 ..< 2^^permuteStrokeOrders.count {
                 for i in 0 ..< permuteStrokeOrders.count {
@@ -100,7 +108,7 @@ public class Unistroke {
         }
     }
     
-    func heapPermute(n: Int){
+    private func heapPermute(n: Int){
         if n == 1 {
            permuteStrokeOrders += strokesOrder
         } else {

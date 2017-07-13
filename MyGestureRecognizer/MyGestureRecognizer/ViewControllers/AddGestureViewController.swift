@@ -66,24 +66,6 @@ class AddGestureViewController: UIViewController {
         points.removeAll()
         strokes.append(stroke)
         print("STOP")
-//        if (template.isEmpty) {
-//            template = points
-//            points.removeAll()
-//        } else {
-//            let unistroke = Unistroke(name: "da")
-//            let stroke = Stroke(points: template)
-//            unistroke.generateUnistrokePermutations(strokes: [stroke])
-//            
-//            points = Stroke.resample(points: points, totalPoints: 96)
-//            let radians = Stroke.indicativeAngle(points: points)
-//            points = Stroke.rotateBy(points: points, radians: -radians)
-//            let vector = Stroke.calculateStartUnitVector(points: points)
-//            
-//            let (match, score) = unistroke.recoginze(points: points, vector: vector, n: 3, multistrokes: [unistroke.unistrokes])
-//            print(score)
-//            print(match)
-//        }
-        
     }
     
     private func drawLine(from: CGPoint, to: CGPoint) {
