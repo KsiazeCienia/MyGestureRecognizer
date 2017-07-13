@@ -35,6 +35,8 @@ final class DrawingViewController: UIViewController {
 
     @IBAction func clean(_ sender: Any) {
         drawSpace.image = nil
+        strokes.removeAll()
+        points.removeAll()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -61,6 +63,10 @@ final class DrawingViewController: UIViewController {
             drawLine(from: lastPoint, to: lastPoint)
         }
         print("STOP")
+        if points.count < 12 {
+            //komunkat o zbyt małej ilośći znaków 
+            return
+        }
         let stroke = Stroke(points: points)
         strokes.append(stroke)
         points.removeAll()

@@ -18,7 +18,7 @@ public class Unistroke {
     static let delta = CGFloat(2).toRadians()
     
     private var strokesOrder = [Int]()
-    private var permuteStrokeOrders = [Int]()
+    private var permuteStrokeOrders = [[Int]]()
     var strokes = [Stroke]()
     var name: String
     
@@ -41,7 +41,7 @@ public class Unistroke {
         for i in 0 ..< strokes.count {
             strokesOrder.append(i)
         }
-        heapPermute(n: strokesOrder.count)
+        heapPermute(n: strokes.count)
         makeUnistroke()
         for stroke in strokes {
             stroke.points = Stroke.resample(points: stroke.points, totalPoints: Unistroke.n)
@@ -61,6 +61,7 @@ public class Unistroke {
         let radians = Stroke.indicativeAngle(points: points)
         points = Stroke.rotateBy(points: points, radians: -radians)
         points = Stroke.scaleToDim(points: points)
+        points = Stroke.translateTo(points: points)
         let startVector = Stroke.calculateStartUnitVector(points: points)
         
         var b = CGFloat.infinity
@@ -70,12 +71,14 @@ public class Unistroke {
             for stroke in multistroke.strokes {
                 let strokeVector = Stroke.calculateStartUnitVector(points: stroke.points)
                 if ((angleBetweenVectors(a: startVector, b: strokeVector)) < alpha) {
-                   distance = Stroke.distanceAtBestAngle(points: points, templatePoints: stroke.points, fromAngle: negativeTheta, toAngle: theta, delta: 0.8)
+                   distance = Stroke.distanceAtBestAngle(points: points, templatePoints: stroke.points, fromAngle: negativeTheta, toAngle: theta, delta: delta)
                     //MARK:- TODO sprwdzić
                     if distance < b {
                         b = distance
                         bestStroke = multistroke.name
                     }
+                } else {
+                    
                 }
             }
         }
@@ -85,16 +88,21 @@ public class Unistroke {
     
     //MARK:- TODO tu też te pierońskie kąty
     static func angleBetweenVectors(a: CGPoint, b: CGPoint) -> CGFloat {
+        var n = a.x * b.x + a.y * b.y
+        if (n < CGFloat(-1) || n > CGFloat(1)) {
+            
+        }
         return acos(a.x * b.x + a.y * b.y)
     }
     
+    static func round(n: CGFloat, d: )
+    
     //MARK:- TODO sprawdzić bo coś szemrane
     private func makeUnistroke() {
-        for _ in permuteStrokeOrders {
-            for b in 0 ..< 2^^permuteStrokeOrders.count {
-                for i in 0 ..< permuteStrokeOrders.count {
-                    let strokeIndex = strokesOrder[i]
-                    let stroke = strokes[strokeIndex]
+        for permuteStrokeOrder in permuteStrokeOrders {
+            for b in 0 ..< 2^^permuteStrokeOrder.count {
+                for i in 0 ..< permuteStrokeOrder.count {
+                    let stroke = strokes[permuteStrokeOrder[i]]
                     //MARK:- TODO poczytać o tym
                     var points = [CGPoint]()
                     if ((b >> i) & 1) == 1 {
@@ -110,9 +118,9 @@ public class Unistroke {
     
     private func heapPermute(n: Int){
         if n == 1 {
-           permuteStrokeOrders += strokesOrder
+           permuteStrokeOrders.append(strokesOrder)
         } else {
-            for i in 0 ... n {
+            for i in 0 ..< n {
                 heapPermute(n: n - 1)
                 if (n % 2) == 1 {
                     let tmp = strokesOrder[0]

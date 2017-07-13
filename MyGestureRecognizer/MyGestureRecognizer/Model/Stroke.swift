@@ -11,6 +11,7 @@ import UIKit
 public class Stroke {
     
     static let size = CGFloat(250)
+    //SPROBOWAĆ MANIPULOWAĆ MIĘDZY 0.20-0.35
     static let threshold = CGFloat(0.3)
     static let n = 96
     static let i = 12
@@ -22,6 +23,7 @@ public class Stroke {
         self.points = points
     }
     
+    //SPRAWDZONE
     static func translateTo(points: [CGPoint]) -> [CGPoint] {
         let center = Stroke.centroid(points: points)
         let zeroPoint = CGPoint.zero
@@ -35,6 +37,7 @@ public class Stroke {
         return newPoints
     }
     
+    //SPRAWDZONE
     static func calculateStartUnitVector(points: [CGPoint]) -> CGPoint {
         let x = points[i].x - points[0].x
         let y = points[i].y - points[0].y
@@ -43,6 +46,7 @@ public class Stroke {
         return CGPoint(x: vx, y: vy)
     }
     
+    //SPRAWDZONE
     static func scaleToDim(points: [CGPoint]) -> [CGPoint] {
         let boundingBox = BoundingBox(points: points)
         var newPoints = [CGPoint]()
@@ -60,6 +64,7 @@ public class Stroke {
         return newPoints
     }
     
+    //SPRAWDZONE
     static func rotateBy(points: [CGPoint], radians: CGFloat) -> [CGPoint] {
         let center = centroid(points: points)
         let cosvalue = cos(radians)
@@ -73,6 +78,7 @@ public class Stroke {
         return newPoints
     }
     
+    //SPRAWDZONE
     static func distanceAtBestAngle(points: [CGPoint], templatePoints: [CGPoint], fromAngle: CGFloat, toAngle: CGFloat, delta: CGFloat) -> CGFloat {
         var x1 = Stroke.phi*fromAngle + (1 - Stroke.phi)*toAngle
         var f1 = Stroke.distanceAtAngle(points: points, templatePoints: templatePoints, angle: x1)
@@ -98,12 +104,14 @@ public class Stroke {
         return min(f1, f2)
     }
     
+    //SPRAWDZONE
     static func distanceAtAngle(points: [CGPoint], templatePoints: [CGPoint], angle: CGFloat) -> CGFloat {
         let newPoints = Stroke.rotateBy(points: points, radians: angle)
         return Stroke.pathDistance(points: newPoints, templatePoints: templatePoints)
         
     }
     
+    //DOWIEDZIEĆ SIĘ CZY NA PEWNO TEN MIN MOZE BYĆ
     static func pathDistance(points: [CGPoint], templatePoints: [CGPoint]) -> CGFloat {
         var length = CGFloat(0)
         let count = min(points.count, templatePoints.count)
@@ -113,24 +121,26 @@ public class Stroke {
         return (length / CGFloat(count))
     }
     
+    //SPRAWDZONE
     static func indicativeAngle(points: [CGPoint]) -> CGFloat {
         let center = centroid(points: points)
         return atan2(center.y - points[0].y, center.x - points[0].x)
     }
     
+    //MOŻE POWSTAĆ BUG A PROPO DODANIA OSTATNIEJ WARTOŚĆI
     static func resample(points: [CGPoint], totalPoints: Int) -> [CGPoint] {
         let avarageLength = pathLength(points: points) / CGFloat((totalPoints - 1))
         var currentLength = CGFloat(0)
         var actualPoints = points
         var newPoints = [points[0]]
-        for i in 1 ..< points.count {
-            let length = points[i].distanceTo(point: points[i - 1])
-            if (currentLength + length) > avarageLength {
-                let x = points[i - 1].x + ((avarageLength - currentLength) / length) * (points[i].x - points[i - 1].x)
-                let y = points[i - 1].x + ((avarageLength - currentLength) / length) * (points[i].y - points[i - 1].y)
+        for i in 1 ..< actualPoints.count {
+            let length = actualPoints[i].distanceTo(point: points[i - 1])
+            if (currentLength + length) >= avarageLength {
+                let x = actualPoints[i - 1].x + ((avarageLength - currentLength) / length) * (actualPoints[i].x - actualPoints[i - 1].x)
+                let y = actualPoints[i - 1].x + ((avarageLength - currentLength) / length) * (actualPoints[i].y - actualPoints[i - 1].y)
                 let q = CGPoint(x: x, y: y)
                 newPoints.append(q)
-                actualPoints.append(q)
+                actualPoints[i] = q
                 currentLength = CGFloat(0)
             } else {
                 currentLength += length
@@ -139,6 +149,7 @@ public class Stroke {
         return newPoints
     }
     
+    //SPRAWDZONE
     static func pathLength(points: [CGPoint]) -> CGFloat {
         var length = CGFloat(0)
         for i in 1 ..< points.count {
@@ -147,6 +158,7 @@ public class Stroke {
         return length
     }
     
+    //SPRAWDZONE
     static func centroid(points: [CGPoint]) -> CGPoint {
         var totalWidth = CGFloat(0)
         var totalHeigth = CGFloat(0)

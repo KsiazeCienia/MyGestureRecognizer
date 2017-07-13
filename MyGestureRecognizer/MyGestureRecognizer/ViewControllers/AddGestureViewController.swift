@@ -23,6 +23,12 @@ class AddGestureViewController: UIViewController {
 
     @IBAction func saveButton(_ sender: Any) {
         if let name = textField.text {
+            for stroke in strokes {
+                if stroke.points.count < 12 {
+                    //MARK:- TODO wyświetlić info o za małej ilości punktów
+                    return
+                }
+            }
             let unistroke = Unistroke(name: name, strokes: strokes)
             database.addGesture(unistroke: unistroke)
         } else {
