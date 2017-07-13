@@ -103,7 +103,7 @@
             </objects>
             <point key="canvasLocation" x="2439" y="430"/>
         </scene>
-        <!--Item 1-->
+        <!--Rysuj-->
         <scene sceneID="Geu-Dj-vvU">
             <objects>
                 <viewController id="qF6-6P-e9r" customClass="DrawingViewController" customModule="MyGestureRecognizer" customModuleProvider="target" sceneMemberID="viewController">
@@ -116,20 +116,41 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L2M-0n-JWA">
-                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <rect key="frame" x="0.0" y="80" width="375" height="498"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ftq-5K-afE">
+                                <rect key="frame" x="0.0" y="20" width="375" height="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0tM-F0-kyC">
+                                <rect key="frame" x="0.0" y="578" width="375" height="30"/>
+                                <state key="normal" title="Wyczyść"/>
+                                <connections>
+                                    <action selector="clean:" destination="qF6-6P-e9r" eventType="touchUpInside" id="ODk-bV-WXC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="wXS-zu-Bor" firstAttribute="top" secondItem="L2M-0n-JWA" secondAttribute="bottom" id="PlE-Sy-Tr2"/>
+                            <constraint firstItem="L2M-0n-JWA" firstAttribute="top" secondItem="ftq-5K-afE" secondAttribute="bottom" id="0vI-Ai-488"/>
+                            <constraint firstAttribute="trailing" secondItem="ftq-5K-afE" secondAttribute="trailing" id="2mo-QO-wI1"/>
+                            <constraint firstAttribute="trailing" secondItem="0tM-F0-kyC" secondAttribute="trailing" id="9wA-NH-mMu"/>
+                            <constraint firstItem="0tM-F0-kyC" firstAttribute="leading" secondItem="Ue1-hk-bs6" secondAttribute="leading" id="Jcy-Pt-ZsK"/>
+                            <constraint firstItem="ftq-5K-afE" firstAttribute="top" secondItem="GRd-Rt-e95" secondAttribute="bottom" id="ORO-VM-O2K"/>
+                            <constraint firstItem="ftq-5K-afE" firstAttribute="leading" secondItem="Ue1-hk-bs6" secondAttribute="leading" id="QPG-qe-a2K"/>
+                            <constraint firstItem="wXS-zu-Bor" firstAttribute="top" secondItem="L2M-0n-JWA" secondAttribute="bottom" constant="40" id="Qys-hj-fAL"/>
                             <constraint firstAttribute="trailing" secondItem="L2M-0n-JWA" secondAttribute="trailing" id="bVF-Ea-7xM"/>
-                            <constraint firstItem="L2M-0n-JWA" firstAttribute="top" secondItem="GRd-Rt-e95" secondAttribute="bottom" id="mNK-LH-5r5"/>
+                            <constraint firstItem="L2M-0n-JWA" firstAttribute="top" secondItem="GRd-Rt-e95" secondAttribute="bottom" constant="60" id="gVg-Tg-RWf"/>
+                            <constraint firstItem="0tM-F0-kyC" firstAttribute="top" secondItem="L2M-0n-JWA" secondAttribute="bottom" id="iv4-li-IaY"/>
                             <constraint firstItem="L2M-0n-JWA" firstAttribute="leading" secondItem="Ue1-hk-bs6" secondAttribute="leading" id="nMj-bu-lM3"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="LxG-iS-6FK"/>
+                    <tabBarItem key="tabBarItem" title="Rysuj" id="LxG-iS-6FK"/>
                     <connections>
                         <outlet property="drawSpace" destination="L2M-0n-JWA" id="lLy-NN-2C4"/>
+                        <outlet property="label" destination="ftq-5K-afE" id="gJO-ZX-Gvu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3IO-nw-Uea" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -154,11 +175,11 @@
             </objects>
             <point key="canvasLocation" x="-350" y="99"/>
         </scene>
-        <!--Item 2-->
+        <!--Lista gestów-->
         <scene sceneID="6cB-cA-FvL">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MrY-W1-6Ub" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item 2" id="OgX-C4-6tV"/>
+                    <tabBarItem key="tabBarItem" title="Lista gestów" id="OgX-C4-6tV"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="XBR-Bd-ZCM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

@@ -11,7 +11,7 @@ import UIKit
 public class Unistroke {
     
     static let size = CGFloat(250)
-    static let alpha = CGFloat(30)
+    static let alpha = CGFloat(30).toRadians()
     static let n = 96
     static let theta = CGFloat(45).toRadians()
     static let negativeTheta = CGFloat(-45).toRadians()
@@ -38,26 +38,27 @@ public class Unistroke {
         heapPermute(n: strokesOrder.count)
         makeUnistroke(strokes: strokes)
         for unistroke in unistrokes {
-            unistroke.points = Stroke.resample(points: unistroke.points, totalPoints: n)
+            unistroke.points = Stroke.resample(points: unistroke.points, totalPoints: Unistroke.n)
             let radians = Stroke.indicativeAngle(points: unistroke.points)
             unistroke.points = Stroke.rotateBy(points: unistroke.points, radians: -radians)
+            unistroke.points = Stroke.scaleToDim(points: unistroke.points)
         }
         
     }
     
-    func recoginze(points: [CGPoint], vector: CGPoint, n: Int, multistrokes: [[Stroke]]) -> ([Stroke], CGFloat) {
+    static func recoginze(points: [CGPoint], vector: CGPoint, n: Int, multistrokes: [Unistroke]) -> (String, CGFloat) {
         var b = CGFloat.infinity
-        var bestStroke = [Stroke]()
+        var bestStroke = ""
         var length = CGFloat(0)
         for multistroke in multistrokes {
-            for unistroke in multistroke {
+            for unistroke in multistroke.unistrokes {
                 let unistrokeVector = Stroke.calculateStartUnitVector(points: unistroke.points)
-                if angleBetweenVectors(a: vector, b: unistrokeVector) < alpha.toRadians() {
+                if ((angleBetweenVectors(a: vector, b: unistrokeVector)) < alpha) {
                    length = Stroke.distanceAtBestAngle(points: points, templatePoints: unistroke.points, fromAngle: negativeTheta, toAngle: theta, delta: 0.8)
                     //MARK:- TODO sprwdzić
                     if length < b {
                         b = length
-                        bestStroke = multistroke
+                        bestStroke = multistroke.name
                     }
                 }
             }
@@ -67,7 +68,7 @@ public class Unistroke {
     }
     
     //MARK:- TODO tu też te pierońskie kąty
-    func angleBetweenVectors(a: CGPoint, b: CGPoint) -> CGFloat {
+    static func angleBetweenVectors(a: CGPoint, b: CGPoint) -> CGFloat {
         return acos(a.x * b.x + a.y * b.y)
     }
     

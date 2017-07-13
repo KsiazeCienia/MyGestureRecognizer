@@ -11,7 +11,7 @@ import UIKit
 public class Stroke {
     
     static let size = CGFloat(250)
-    static let alpha = 30
+    static let alpha = CGFloat(30).toRadians()
     static let n = 96
     static let i = 12
     static let phi = CGFloat((0.5)*(-1 + sqrt(5)))
@@ -32,6 +32,23 @@ public class Stroke {
         let vx = x / sqrt(x * x + y * y)
         let vy = y / sqrt(x * x + y * y)
         return CGPoint(x: vx, y: vy)
+    }
+    
+    static func scaleToDim(points: [CGPoint]) -> [CGPoint] {
+        let boundingBox = BoundingBox(points: points)
+        var newPoints = [CGPoint]()
+        for point in points {
+            if min(boundingBox.getWidth()/boundingBox.getHeight(), boundingBox.getHeight()/boundingBox.getWidth()) <= alpha {
+                let x = (point.x * size)/max(boundingBox.getWidth(), boundingBox.getHeight())
+                let y = (point.y * size)/max(boundingBox.getWidth(), boundingBox.getHeight())
+                newPoints.append(CGPoint(x: x, y: y))
+            } else {
+                let x = (point.x * size)/boundingBox.getWidth()
+                let y = (point.y * size)/boundingBox.getHeight()
+                newPoints.append(CGPoint(x: x, y: y))
+            }
+        }
+        return newPoints
     }
     
     //MARK:- TODO pamiętać o radianach

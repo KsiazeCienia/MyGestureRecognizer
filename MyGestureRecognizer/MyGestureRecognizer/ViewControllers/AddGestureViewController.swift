@@ -66,7 +66,7 @@ class AddGestureViewController: UIViewController {
         let stroke = Stroke(points: points)
         points.removeAll()
         strokes.append(stroke)
-//        print("STOP")
+        print("STOP")
 //        if (template.isEmpty) {
 //            template = points
 //            points.removeAll()

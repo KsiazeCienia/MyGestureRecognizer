@@ -8,15 +8,30 @@
 
 import UIKit
 
-public struct BoundingBox {
-    var left: CGFloat
-    var right: CGFloat
-    var top: CGFloat
-    var bottom: CGFloat
+struct BoundingBox {
+    var minX: CGFloat
+    var maxX: CGFloat
+    var minY: CGFloat
+    var maxY: CGFloat
     
-//    public init(points: [CGPoint]) {
-//        for point in points {
-//            
-//        }
-//    }
+    init(points: [CGPoint]) {
+        minX = CGFloat.infinity
+        minY = CGFloat.infinity
+        maxX = CGFloat(0)
+        maxY = CGFloat(0)
+        for point in points {
+            minX = min(point.x, minX)
+            minY = min(point.y, minY)
+            maxX = max(point.x, maxX)
+            maxY = max(point.y, maxY)
+        }
+    }
+    
+    func getHeight() -> CGFloat {
+        return maxY - minY
+    }
+    
+    func getWidth() -> CGFloat {
+        return maxX - minX
+    }
 }

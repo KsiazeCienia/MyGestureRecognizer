@@ -12,21 +12,28 @@ final class DrawingViewController: UIViewController {
     
     //MARK:- IBOutlet's
     @IBOutlet weak var drawSpace: UIImageView!
+    @IBOutlet weak var label: UILabel!
+    
+    private let database = Database()
     
     //MARK:- Variables
     private var points = [CGPoint]()
-    private var template = [CGPoint]()
+    private var strokes = [Stroke]()
     private var lastPoint = CGPoint.zero
     private var isSwiping = false
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    @IBAction func clean(_ sender: Any) {
+        drawSpace.image = nil
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -53,24 +60,12 @@ final class DrawingViewController: UIViewController {
             drawLine(from: lastPoint, to: lastPoint)
         }
         print("STOP")
-        if (template.isEmpty) {
-            template = points
-            points.removeAll()
-        } else {
-            let unistroke = Unistroke(name: "da")
-            let stroke = Stroke(points: template)
-            unistroke.generateUnistrokePermutations(strokes: [stroke])
-            
-            points = Stroke.resample(points: points, totalPoints: 96)
-            let radians = Stroke.indicativeAngle(points: points)
-            points = Stroke.rotateBy(points: points, radians: -radians)
-            let vector = Stroke.calculateStartUnitVector(points: points)
-            
-            let (match, score) = unistroke.recoginze(points: points, vector: vector, n: 3, multistrokes: [unistroke.unistrokes])
-            print(score)
-            print(match)
-        }
         
+        points = Stroke.resample(points: points, totalPoints: 96)
+        let radians = Stroke.indicativeAngle(points: points)
+        points = Stroke.rotateBy(points: points, radians: -radians)
+        let vector = Stroke.calculateStartUnitVector(points: points)
+        let (match, score) = Unistroke.recoginze(points: points, vector: vector, n: 3, multistrokes: database.getUnistrokes())
     }
     
     private func drawLine(from: CGPoint, to: CGPoint) {
