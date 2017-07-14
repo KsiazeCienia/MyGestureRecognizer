@@ -13,6 +13,7 @@ class AddGestureViewController: UIViewController {
     @IBOutlet weak var drawSpace: UIImageView!
     @IBOutlet weak var textField: UITextField!
     
+    //MARK:- Constants
     private let database = Database()
     
     //MARK:- Variables
@@ -26,7 +27,6 @@ class AddGestureViewController: UIViewController {
             for stroke in strokes {
                 if stroke.points.count < 12 {
                     //MARK:- TODO wyświetlić info o za małej ilości punktów
-                    return
                 }
             }
             let multistroke = Multistroke(name: name, strokes: strokes)
@@ -79,8 +79,8 @@ class AddGestureViewController: UIViewController {
         drawSpace.image?.draw(in: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
         let context = UIGraphicsGetCurrentContext()
         
-        context?.move(to: CGPoint(x: from.x, y: from.y))
-        context?.addLine(to: CGPoint(x: to.x, y: to.y))
+        context?.move(to: CGPoint(x: from.x , y: from.y ))
+        context?.addLine(to: CGPoint(x: to.x, y: to.y ))
         
         context?.setBlendMode(.normal)
         context?.setLineCap(.round)

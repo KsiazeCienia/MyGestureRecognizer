@@ -49,13 +49,7 @@ public class Stroke {
         let vy = y / sqrt(x * x + y * y)
         return CGPoint(x: vx, y: vy)
     }
-    
-//    static func optimalCosineDistance(v1: [CGPoint], v2: [CGPoint]) -> CGFloat {
-//        var a = CGFloat(0)
-//        var b = CGFloat(0)
-//        for i in 0 ..<
-//    }
-//    
+       
     //SPRAWDZONE
     static func scaleToDim(points: [CGPoint]) -> [CGPoint] {
         let boundingBox = BoundingBox(points: points)
@@ -145,7 +139,6 @@ public class Stroke {
         var newPoints = [points[0]]
         var i = 1
         while (newPoints.count != 96)&&(initialPoints.count > i) {
-           // for i in 1 ..< initialPoints.count {
             let currentLength = initialPoints[i-1].distanceTo(point: initialPoints[i])
             if ((totalLength + currentLength) >= interval) {
                 let qx = initialPoints[i-1].x + ((interval - totalLength) / currentLength) * (initialPoints[i].x - initialPoints[i-1].x)
@@ -158,7 +151,6 @@ public class Stroke {
                 totalLength += currentLength
             }
             i += 1
-            //}
         }
         if newPoints.count == totalPoints-1 {
             newPoints.append(points.last!)

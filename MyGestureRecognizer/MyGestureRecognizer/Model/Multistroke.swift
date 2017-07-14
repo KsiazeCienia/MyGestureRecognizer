@@ -57,7 +57,6 @@ final class Multistroke {
                 var points = [CGPoint]()
                 for i in 0 ..< order.count {
                     let stroke = actualStrokes[order[i]]
-                    //MARK:- TODO poczytać o tym
                     if ((b >> i) & 1) == 1 {
                         points += stroke.points.reversed()
                     } else {
