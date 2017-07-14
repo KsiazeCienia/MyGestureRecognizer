@@ -31,6 +31,10 @@ class AddGestureViewController: UIViewController {
             }
             let multistroke = Multistroke(name: name, strokes: strokes)
             database.addGesture(multistroke: multistroke)
+            textField.text = nil
+            strokes.removeAll()
+            points.removeAll()
+            drawSpace.image = nil
         } else {
             //MARK:- TODO wyświetlić komuniakt o podani nazwy
         }
